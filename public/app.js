@@ -264,7 +264,16 @@ function populateFormFields(data) {
   studentClass.value = data.studentClass || "Not Provided";
   studentSection.value = data.studentSection || "Not Provided";
   studentRollNo.value = data.studentRollNo || "Not Provided";
-  studentNumber.value = data.studentNumber || "Not Provided";
+  parentNumber.value = data.parentNumber || "Not Provided";
+  parentWhatsapp.value = data.parentWhatsapp || "Not Provided";
+  parentemail.value = data.parentemail || "Not Provided";
+  classTeacherNumber.value = data.classTeacherNumber || "Not Provided";
+  classTeacherWhatsapp.value = data.classTeacherWhatsapp || "Not Provided";
+  classTeacherEmail.value = data.classTeacherEmail || "Not Provided";
+  principalEmail.value = data.principalEmail || "Not Provided";
+  qrcodelink.value = data.qrcodelink || "Not Provided";
+  parentabout.value = data.parentabout || "Not Provided";
+  teacherabout.value = data.teacherabout || "Not Provided";
   studentDob.value = data.studentDob || "Not Provided";
   studentBloodgroup.value = data.studentBloodgroup || "Not Provided";
   address.value = data.address || "Not Provided";
@@ -295,7 +304,16 @@ function submitForm() {
   let studentClass = document.getElementById('studentClass').value;
   let studentSection = document.getElementById('studentSection').value;
   let studentRollNo = document.getElementById('studentRollNo').value;
-  let studentNumber = document.getElementById('studentNumber').value;
+  let parentNumber = document.getElementById('studentNumber').value;
+  let parentWhatsapp = document.getElementById('parentWhatsapp').value;
+  let parentemail = document.getElementById('parentemail').value;
+  let classTeacherNumber = document.getElementById('classTeacherNumber').value;
+  let classTeacherWhatsapp = document.getElementById('classTeacherWhatsapp').value;
+  let classTeacherEmail = document.getElementById('classTeacherEmail').value;
+  let principalEmail = document.getElementById('principalEmail').value;
+  let qrcodelink = document.getElementById('qrcodelink').value;
+  let parentabout = document.getElementById('parentabout').value;
+  let teacherabout = document.getElementById('teacherabout').value;
   let studentDob = document.getElementById('studentDob').value;
   let studentBloodgroup = document.getElementById('studentBloodgroup').value;
   let address = document.getElementById('address').value;
@@ -311,12 +329,12 @@ function submitForm() {
   let getDirections = document.getElementById('getDirections').value;
   let editBtn = document.getElementById('editBtn').value;
   let saveBtn = document.getElementById('saveBtn').value;
-  saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,studentNumber, studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections);
+  saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,parentNumber,parentWhatsapp,parentEmail,classTeacherNumber,classTeacherWhatsapp,classTeacherEmail,principalEmail,qrcodelink,parentabout,teacherabout , studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections);
 }
 
 
 // Function to update Data on Card Dashboard Page & if saved successfully, toggle the save button back to edit
-function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo, studentNumber, studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections){
+function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,parentNumber,parentWhatsapp,parentEmail,classTeacherNumber,classTeacherWhatsapp,classTeacherEmail,principalEmail,qrcodelink,parentabout,teacherabout , studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections){
   let userRef = dbRef.child(`Collected Data/${username}`);
   userRef.set({
     template: template,
@@ -329,7 +347,16 @@ function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBann
     studentClass: studentClass,
     studentSection: studentSection,
     studentRollNo: studentRollNo,
-    studentNumber: studentNumber,
+    parentNumber: parentNumber,
+    parentWhatsapp: parentWhatsapp,
+    parentEmail: parentEmail,
+    classTeacherNumber: classTeacherNumber,
+    classTeacherWhatsapp: classTeacherWhatsapp,
+    classTeacherEmail: classTeacherEmail,
+    principalEmail: principalEmail,
+    qrcodelink: qrcodelink,
+    parentabout: parentabout,
+    teacherabout: teacherabout,
     studentDob: studentDob,
     studentBloodgroup: studentBloodgroup,
     address: address,
@@ -367,7 +394,16 @@ function toggleViewMode(isViewMode) {
   studentClass.readOnly = isViewMode;
   studentSection.readOnly = isViewMode;
   studentRollNo.readOnly = isViewMode;
-  studentNumber.readOnly = isViewMode;
+  parentNumber.readOnly = isViewMode;
+  parentWhatsapp.readOnly = isViewMode;
+  parentemail.readOnly = isViewMode;
+  classTeacherNumber.readOnly = isViewMode;
+  classTeacherWhatsapp.readOnly = isViewMode;
+  classTeacherEmail.readOnly = isViewMode;
+  principalEmail.readOnly = isViewMode;
+  qrcodelink.readOnly = isViewMode;
+  parentabout.readOnly = isViewMode;
+  teacherabout.readOnly = isViewMode;
   studentDob.readOnly = isViewMode;
   studentBloodgroup.readOnly = isViewMode;
   address.readOnly = isViewMode;
@@ -596,7 +632,7 @@ function fetchUserData() {
                                   <p id="studentSection">Section : ${data.studentSection || 'Student Section'}</p>
                                   <p id="studentRollNo">Roll No : ${data.studentRollNo || 'Student Roll No.'}</p>
                                   <p id="studentRollNo">Addmission No : ${data.studentRollNo || 'Student Roll No.'}</p>
-                                  <p id="studentDob">Dob: ${data.studentDob || 'Student DOB'}</p>
+                                  <p id="studentDob">DOB: ${data.studentDob || 'Student DOB'}</p>
                                   <p id="studentBloodgroup">Blood Group : ${data.studentBloodgroup || 'Student Blood Group'}</p>
                                   </div>
                               </div>
@@ -629,7 +665,7 @@ function fetchUserData() {
                                   </div>
 
                                   <div class="icon">
-                                   <a href="https://wa.me/${data.parentwhatsapp}" target="_blank" style="color:#25D366; text-decoration:none;">
+                                   <a href="https://wa.me/${data.parentWhatsapp}" target="_blank" style="color:#25D366; text-decoration:none;">
                                         <i class="fab fa-whatsapp"></i>
                                      </a>
                                     <p>WhatsApp</p>
@@ -659,20 +695,20 @@ function fetchUserData() {
                                  
                                   <div class="icon">
                                       
-                                  <a href="tel:${data.classteacherNumber}" style=" color:#2a4a95; text-decoration:none;"><i class="fas fa-phone" id="classteachernumber"></i></a>
+                                  <a href="tel:${data.classTeacherNumber}" style=" color:#2a4a95; text-decoration:none;"><i class="fas fa-phone" id="classteachernumber"></i></a>
                                   <p id="classteacherNumber">Number</p>
                             
                                   </div>
 
                                   <div class="icon">
-                                   <a href="https://wa.me/${data.classteacherwhatsapp}" target="_blank" style="color:#25D366; text-decoration:none;">
+                                   <a href="https://wa.me/${data.classTeacherWhatsapp}" target="_blank" style="color:#25D366; text-decoration:none;">
                                         <i class="fab fa-whatsapp"></i>
                                      </a>
                                     <p>WhatsApp</p>
                                     </div>
 
                                     <div class="icon">
-                                     <a href="mailto:${data.classteacheremail}" style="color:#EA4335; text-decoration:none;">
+                                     <a href="mailto:${data.classTeacherEmail}" style="color:#EA4335; text-decoration:none;">
                                      <i class="fas fa-envelope"></i>
                                       </a>
                                      <p>Email</p>
@@ -685,7 +721,7 @@ function fetchUserData() {
                                   <hr class="line-right">
                               </div>
                                <div class="icon">
-                                <a href="mailto:${data.principalemail}?subject=Feedback%20Regarding%20School&body=Dear%20Principal,%0D%0A%0D%0AI%20would%20like%20to%20provide%20feedback%20on%20[mention%20feedback%20topic].%0D%0A%0D%0ARegards,%0D%0A[Your%20Name]" 
+                                <a href="mailto:${data.principalEmail}?subject=Feedback%20Regarding%20School&body=Dear%20Principal,%0D%0A%0D%0AI%20would%20like%20to%20provide%20feedback%20on%20[mention%20feedback%20topic].%0D%0A%0D%0ARegards,%0D%0A[Your%20Name]" 
                                  style="color:#FFA500; text-decoration:none;">
                                  <i class="fas fa-comment-alt"></i>
                                  </a>
@@ -820,11 +856,15 @@ function fetchUserData() {
 
 
 
-      abouticon.onclick = function () {
+      parentabouticon.onclick = function () {
         modal.style.display = "flex";
-        modalText.textContent = `${data.about || 'About the company'}`;
+        modalText.textContent = `${data.parentabout || 'About the company'}`;
       }
-
+      
+      teacherabouticon.onclick = function () {
+        modal.style.display = "flex";
+        modalText.textContent = `${data.teacherabout || 'About the company'}`;
+      }
 
       qricon.onclick = function () {
         modal.style.display = "flex";
