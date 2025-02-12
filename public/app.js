@@ -593,10 +593,11 @@ function fetchUserData() {
                                   <h2 id="studentName">${data.studentName || 'Student Name'}</h2>
                                   <div class="profile-image1">
                                   <p id="studentClass">Class :${data.studentClass || 'Student Class'}</p>
-                                  <p id="studentSection">Section: ${data.studentSection || 'Student Section'}</p>
-                                  <p id="studentRollNo">Roll No. : ${data.studentRollNo || 'Student Roll No.'}</p>
-                                  <p id="studentDob">Date of Birth: ${data.studentDob || 'Student DOB'}</p>
-                                  <p id="studentBloodgroup">Blood Group: ${data.studentBloodgroup || 'Student Blood Group'}</p>
+                                  <p id="studentSection">Section : ${data.studentSection || 'Student Section'}</p>
+                                  <p id="studentRollNo">Roll No : ${data.studentRollNo || 'Student Roll No.'}</p>
+                                  <p id="studentRollNo">Addmission No : ${data.studentRollNo || 'Student Roll No.'}</p>
+                                  <p id="studentDob">Dob: ${data.studentDob || 'Student DOB'}</p>
+                                  <p id="studentBloodgroup">Blood Group : ${data.studentBloodgroup || 'Student Blood Group'}</p>
                                   </div>
                               </div>
   
