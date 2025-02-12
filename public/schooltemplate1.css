@@ -1,527 +1,364 @@
 /* Your original styles */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-*{
-    font-family: 'Roboto';
-}
-
-#slideshow1 {
-    display: none;  
-}
-
-
-body {
+/* Reset and base styles */
+* {
     margin: 0;
-    height: max-content; /* Full viewport height */
-    display: flex;
-    justify-content: center;  /* Horizontal centering */
-    align-items: center;      /* Vertical centering */
-}
-
-#main-look{
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;               /* Full width on small devices */
-    max-width: 840px;           /* Restricts width on larger devices */
+    padding: 0;
     box-sizing: border-box;
+    
 }
 
+/* Main container styles */
+#main-look {
+    width: 100%;
+    max-width: 400px;
+    margin: 0px auto;
+    background: #e8b314;
+   
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
 
+#main-look2 {
+    width: 100%;
+}
+
+/* Logo container styles */
 #logo-container {
+    padding: 20px;
+    background:#e8b314;
     display: flex;
     align-items: center;
-    margin-bottom: 20px; /* Space between logo and banner */
+    gap: 15px;
 }
 
-#logo-container img {
-    width: 80px; /* Adjust size as needed */
-    height: auto;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow */
-    border-radius: 5px; /* Optional: round corners slightly */
-    margin-right: 15px; /* Space between logo and text */
+#schoolLogo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.logo-text {
+    flex-grow: 1;
 }
 
 .logo-text h2 {
-    font-size: 20px;
-    color: #2a4a95;
-    margin: 0;
-    text-align: left;
+    font-size: 1.4rem;
+    color: #333;
+    margin-bottom: 5px;
 }
 
 .logo-text p {
-    font-size: 14px;
-    color: #2a4a95;
-    margin: 0;
-    font-style: italic;
-    text-align: left;
+    font-size: 0.9rem;
+    color: #666;
 }
 
-#companyBanner {
+/* Banner styles */
+#banner {
     width: 100%;
-    max-width: 800px; /* Optional: Restrict width on large screens */
-    height: 300px; /* Set a fixed height for the banner */
-    background-size: cover; /* Ensure the background image covers the area */
-    background-repeat: no-repeat;
-    background-position: center; /* Center the image */
-    margin-bottom: 20px; /* Space below the banner */
+    height: 350px;
+    overflow: hidden;
+    background-size: cover;
 }
 
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
+#schoolBanner {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    justify-content: center;
-    align-items: center;
+    object-fit: cover;
 }
 
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    height:fit-content;
-    text-align: center;
-}
-
-
+/* Wave container styles */
 .wave-container {
+    margin-top: -90px;
     position: relative;
-    top: -75px; /* Adjust to move the wave over the banner */
-    overflow: hidden;
+    z-index: 2;
 }
 
 .wave-container svg {
     display: block;
     width: 100%;
-    height: auto;
 }
 
+/* Profile section styles */
 .profile-section {
-    position: relative;
-    top: -60px; /* Adjust to bring profile section close to the wave */
-    padding: 0px;
-    /* border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); */
+    padding: 0 20px 20px;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: -85px ;
+   
 }
 
 .profile-image {
-    width: 150px;
-    height: 150px;
-}
-
-.profile-image h2{
-    width: 250px;
-    margin: auto;
-    margin-top: -80px;
-    margin-left: -50px;
-    color: #2a4a95;
-    font-weight: 22px;
-}
-
-.profile-image p{
-    font-weight: 18px;
-    color: #2a4a95;
-}
-#banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease; /* Smooth zoom effect */
-}
-
-#banner img:hover {
-    transform: scale(1.05); /* Slight zoom on hover */
+    margin-top: -40px;
+    position: relative;
+    z-index: 3;
 }
 
 .profile-image img {
-    width: 150px; /* Ensure the image fits the container */
-    height: 150px; /* Ensure the image fits the container */
-    border-radius: 50%; /* Ensure the image is circular */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
-    margin-bottom: 120px;
-    margin-top: -210px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #e8b314;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+}
+.intro {
+    width: 100%;
+    max-width: 500px;
+    background-image: url(https://res.cloudinary.com/dffj2dfcj/image/upload/v1734282049/jhy6ot817tgntchyzhda.png);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: -50px;
+    position: relative;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-size: cover; /* Ensures full coverage without repeat */
+    background-position: center; /* Centers the image */
+
 }
 
+#studentName {
+    margin: 15px 0 10px;
+    font-size: 1.5rem;
+    color: #333;
+}
 
+/* .profile-image p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 1.3rem;
+} */
+
+
+  .profile-image1{
+    margin: 12px 0;
+    color: #121111;
+    font-size: 1.1rem;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    padding: 15px;
+    border-radius: 8px;
+    background: #e8b314;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    position: relative;
+    overflow: hidden;
+  }
+
+  
+
+/* Contact icons styles */
 .contact-icons {
     display: flex;
     justify-content: center;
-    gap: 50px;
-    flex-wrap: nowrap;
-    margin-top: -70px;
+    gap: 30px;
+    padding: 20px;
+    background: #fff;
 }
 
 .icon {
-    display: flex;
-    flex-direction: column; /* Makes icon and text stack vertically */
-    align-items: center; /* Centers icon and text */
-    color: #2a4a95;
-    margin-top: 35px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-.icon-row {
-    display: flex;
-    justify-content: space-around; /* Ensures icons are evenly spaced */
-    /* gap: 0.9; Adds space between each icon */
-    margin-top: 20px;
-    flex-wrap: nowrap; /* Prevents wrapping to a new line */
+.icon:hover {
+    transform: scale(1.1);
 }
 
 .icon i {
-    font-size: 30px;
-    border: 1px solid #2a4a95;
-    border-radius: 50%;
-    padding: 10px;
-    box-sizing: border-box;
+    font-size: 1.8rem;
+    color: #e8b314;
     margin-bottom: 5px;
-    display: flex;
-    flex-direction: row;
 }
 
-.icon i:hover{
-    border-color: transparent;
+.icon p {
+    font-size: 0.8rem;
+    color: #000000;
 }
 
+/* Section styles */
 .section {
-    margin: 40px 0;
-    text-align: center;
-    position: relative;
+    padding: 20px;
 }
 
 .line-container {
-    display: flex; /* Use flexbox to align items in a row */
-    align-items: center; /* Center vertically */
-    width: 100%;
-    margin-top: -10px;
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
 }
 
 .line-left, .line-right {
-    width: 40%;
-    height: 2px;
-    background-color: #2a4a95;
-}
-
-.line-left {
-    width: 45%; /* Left line width */
-   /* margin-right: 10px;  Space between line and text */
-}
-
-.line-right {
-    width: 45%; /* Right line width */
-    /*margin-left: 10px;  Space between text and line */
+    flex: 1;
+    height: 1px;
+    background: #ddd;
 }
 
 .line-text {
-    color: #2a4a95;
-    font-size: 22px;
-    margin: 0 10px;
-    font-weight: bold;
-    white-space: nowrap;
+    padding: 0 15px;
+    color: #000000;
+    font-size: 0.9rem;
 }
 
-.Bio{
-    color: #2a4a95;
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    justify-content: right;
-}
-
-#services{
-    color: #2a4a95;
-    font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 15px;
-}
-
-.address{
-    color: #2a4a95;
-    font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: left;
-    margin: 10px 20px;
-}
-
-.address button{
-    background-color: #2a4a95; /* Set your desired background color */
-    color: white; /* Set text color */
-    border: none; /* Remove border */
-    padding: 10px 20px; /* Add padding for height and width */
-    border-radius: 25px; /* This makes the button curved */
-    font-size: 16px; /* Set text size */
-    font-weight: bold; /* Bold text if needed */
-    cursor: pointer; /* Change cursor on hover */
-    text-align: center; /* Center text inside button */
-    display: inline-block;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
-    margin-top: 5px;
-}
-
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Background overlay */
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    height:fit-content;
-    text-align: center;
-}
-
+/* Share options styles */
 .share-options {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    z-index: 999;
-    text-align: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    border-radius: 10px;
-    
-}
-
-/* Share option buttons */
-.share-option {
-    display: block;
-    margin: 10px 0;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 14px;
-    align-content: center;
-    
-}
-
-.share-option:hover {
-    background-color: #e0e0e0;
-}
-
-/* Close button */
-.close-btn {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #ff6f61;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.close-btn:hover {
-    background-color: #e65c50;
-}
-
-.icon-row2 {
-    display: flex;
-    justify-content: space-around; /* Ensures icons are evenly spaced */
-    /* gap: 0.9; Adds space between each icon */
-    margin-top: 20px;
-    flex-wrap: nowrap; /* Prevents wrapping to a new line */
-}
-
-
-
-/* Media Queries for Responsiveness */
-
-@media (max-width: 768px) {
-    #companyBanner {
-        height: 200px; /* Reduce height on smaller screens */
-    }
-
-    .profile-image img {
-        width: 120px;
-        height: 120px;
-        margin-top: -70px;
-    }
-
-    .profile-image h2 {
-        font-size: 18px;
-        margin-top: -90px;
-    }
-
-    .profile-image p {
-        font-size: 16px;
-        margin-top: 2px;
-    }
-
-    
-
-    .side-buttons .Enquiry,
-    .side-buttons .Share {
-        width: 35px;
-        height: 35px;
-        font-size: small;
-    }
-
-    .contact-icons {
-        gap: 30px;
-        font-size: small;
-        margin-top: 5px;
-    }
-
-    .icon i {
-        font-size: 30px;
-        padding: 8px;
-        color: #2a4a95;
-    }
-
-    .icon-row{
-        font-size: small;
-    }
-
-    .line-left, .line-right {
-        width: 30%;
-    }
-
-    .line-text {
-        font-size: 18px;
-    }
-
-    .address {
-        font-size: 18px;
-        font-size: small;
-        align-items: center;
-    }
-
-    .address button {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .modal-content {
-        width: 90%;
-    }
-
-    .share-options {
-        width: 200px;
-    }
-
-    #logo-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px; /* Space between logo and banner */
-        /* margin-left: 50px; */
-    }
-    
-    #logo-container img {
-        width: 50px; /* Adjust size as needed */
-        height: auto;
-        /* left: 10px; */
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow */
-        border-radius: 5px; /* Optional: round corners slightly */
-        margin-right: 15px; /* Space between logo and text */
-    }
-    
-    .logo-text h2 {
-        font-size: 20px;
-        color: #2a4a95;
-        margin: 0;
-        text-align: left;
-    }
-    
-    .logo-text p {
-        font-size: 14px;
-        color: #2a4a95;
-        margin: 0;
-        font-style: italic;
-        text-align: left;
-    }
-
-    #services{
-        font-size:small;
-    }
-
-
-    .icon-row2 {
-        display: flex;
-        justify-content: center;
-        align-items: left;
-        gap: 10px;
-        margin-top: 20px;
-        flex-wrap: nowrap; /* Prevents wrapping to a new line */
-    }
-
-
-    .modal-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        width: fit-content;
-        height:fit-content;
-        text-align: center;
-    }
-}
-.center-button1:hover {
-    background-color: #0056b3;  /* Darker blue on hover */
-}
-
-   /* Fixed Footer Styles */
-   .fixed-footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
-    background-color: rgba(128, 0, 32, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0;
+    right: 0;
+    background: white;
+    padding: 20px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
 }
 
-/* Button Styles */
-.center-button {
-    position: fixed;  /* Fixes the button to the screen */
-    bottom: 0px;     /* Distance from the bottom of the screen */
-    left: 50%;        /* Horizontally centers the button */
-    transform: translateX(-50%); /* Adjusts for exact centering */
-    padding: 10px 20px; /* Optional: adds padding to the button */
-    background-color:rgba(128, 0, 32, 0.9); /* Optional: customize the button color */
-    color: white;     /* Optional: customize text color */
-    border: none;     /* Optional: remove border */
-    border-radius: 5px; /* Optional: rounded corners */
-    font-size: 16px;   /* Optional: adjusts font size */
-    z-index: 1000;    /* Optional: ensures the button is on top of other content */
-    transition: background-color 0.3s ease;
+.share-option {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    border: none;
+    background: #f5f5f5;
+    border-radius: 8px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
 }
-.center-button:hover {
-    background-color: #0056b3;  /* Darker blue on hover */
+
+.close-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    background: #2a4a95;
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
 }
-#aboutme,#address{
+
+/* Icon row styles */
+.icon-row, .icon-row2 {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 15px 0;
+}
+
+/* Slideshow styles */
+.slideshow-container {
+    position: relative;
+    margin: 20px 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.slide {
+    display: none;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    z-index: 2;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Address section styles */
+#address {
     text-align: center;
-    font-size: 17px;
-    padding-top: 10px;
-    line-height: 20px;
-    color: #2a4a95;
+    margin: 15px 0;
+    color: #000000;
+    line-height: 1.5;
+}
+
+/* Button styles */
+.center-button, .center-button1 {
+    display: block;
+    width: 80%;
+    margin: 15px auto;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #e8b314;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.center-button:hover, .center-button1:hover {
+    background: #1e3670;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    
+
+    .profile-image img {
+        width: 100px;
+        height: 100px;
+    }
+
+    #studentName {
+        font-size: 1.3rem;
+    }
+
+    .icon-row, .icon-row2 {
+        gap: 20px;
+    }
+
+    .icon i {
+        font-size: 1.5rem;
+    }
 }

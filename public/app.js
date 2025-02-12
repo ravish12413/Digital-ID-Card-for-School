@@ -591,34 +591,119 @@ function fetchUserData() {
                                <div class="profile-image">
                                   <img src="${data.studentPicture || 'default-profile.png'}" id="studentPicture" alt="Student Image">
                                   <h2 id="studentName">${data.studentName || 'Student Name'}</h2>
+                                  <div class="profile-image1">
                                   <p id="studentClass">Class :${data.studentClass || 'Student Class'}</p>
-                                  <p id="studentSection">Section: ${data.studentSection || 'Student Section'}</p>
-                                  <p id="studentRollNo">Roll No. : ${data.studentRollNo || 'Student Roll No.'}</p>
-                                  <p id="studentDob">Date of Birth: ${data.studentDob || 'Student DOB'}</p>
-                                  <p id="studentBloodgroup">Blood Group: ${data.studentBloodgroup || 'Student Blood Group'}</p>
+                                  <p id="studentSection">Section : ${data.studentSection || 'Student Section'}</p>
+                                  <p id="studentRollNo">Roll No : ${data.studentRollNo || 'Student Roll No.'}</p>
+                                  <p id="studentRollNo">Addmission No : ${data.studentRollNo || 'Student Roll No.'}</p>
+                                  <p id="studentDob">Dob: ${data.studentDob || 'Student DOB'}</p>
+                                  <p id="studentBloodgroup">Blood Group : ${data.studentBloodgroup || 'Student Blood Group'}</p>
+                                  </div>
                               </div>
   
                               
                           </div>
                         
   
-                           <div class="contact-icons" >
-            
-                              <div class="icon">
-                                  <a href="tel:${data.studentNumber}" style=" color:#2a4a95; text-decoration:none;"><i class="fas fa-phone" id="phonenumber"></i></a>
-                                  <p id="studentNumber">Number</p>
-                              </div>
-
-                               
-                          </div>
   
-                           <div class="section">                                                  
+                           
+                          
+                               <div class="section">
+                              <div class="line-container">
+                                  <hr class="line-left">
+                                  <span class="line-text">Parent Details</span>
+                                  <hr class="line-right">
+                              </div>
                               
-                              
-                                <div class="icon-row">
-                                   
+                              <div class="icon-row2">
+                                 <div class="icon" >
+                                      <i class="fa-solid fa-handshake" id="parentabouticon" ></i>
+                                      <p>About</p>
+                                   </div>
+                                 
+                                  <div class="icon">
+                                      
+                                  <a href="tel:${data.parentNumber}" style=" color:#2a4a95; text-decoration:none;"><i class="fas fa-phone" id="parentnumber"></i></a>
+                                  <p id="parentNumber">Number</p>
+                            
+                                  </div>
 
-                                   <div class="icon" onclick="toggleShareOptions()">
+                                  <div class="icon">
+                                   <a href="https://wa.me/${data.parentwhatsapp}" target="_blank" style="color:#25D366; text-decoration:none;">
+                                        <i class="fab fa-whatsapp"></i>
+                                     </a>
+                                    <p>WhatsApp</p>
+                                    </div>
+
+                                    <div class="icon">
+                                     <a href="mailto:${data.parentemail}" style="color:#EA4335; text-decoration:none;">
+                                     <i class="fas fa-envelope"></i>
+                                      </a>
+                                     <p>Email</p>
+                                        </div>
+
+                                 
+                                 
+                              </div>
+                               <div class="line-container">
+                                  <hr class="line-left">
+                                  <span class="line-text">Class Teacher Details</span>
+                                  <hr class="line-right">
+                              </div>
+                              
+                              <div class="icon-row2">
+                                  <div class="icon" >
+                                      <i class="fa-solid fa-handshake" id="teacherabouticon" ></i>
+                                      <p>About</p>
+                                   </div>
+                                 
+                                  <div class="icon">
+                                      
+                                  <a href="tel:${data.classteacherNumber}" style=" color:#2a4a95; text-decoration:none;"><i class="fas fa-phone" id="classteachernumber"></i></a>
+                                  <p id="classteacherNumber">Number</p>
+                            
+                                  </div>
+
+                                  <div class="icon">
+                                   <a href="https://wa.me/${data.classteacherwhatsapp}" target="_blank" style="color:#25D366; text-decoration:none;">
+                                        <i class="fab fa-whatsapp"></i>
+                                     </a>
+                                    <p>WhatsApp</p>
+                                    </div>
+
+                                    <div class="icon">
+                                     <a href="mailto:${data.classteacheremail}" style="color:#EA4335; text-decoration:none;">
+                                     <i class="fas fa-envelope"></i>
+                                      </a>
+                                     <p>Email</p>
+                                        </div>
+                                </div>
+
+                                <div class="line-container">
+                                  <hr class="line-left">
+                                  <span class="line-text">Feedback</span>
+                                  <hr class="line-right">
+                              </div>
+                               <div class="icon">
+                                <a href="mailto:${data.principalemail}?subject=Feedback%20Regarding%20School&body=Dear%20Principal,%0D%0A%0D%0AI%20would%20like%20to%20provide%20feedback%20on%20[mention%20feedback%20topic].%0D%0A%0D%0ARegards,%0D%0A[Your%20Name]" 
+                                 style="color:#FFA500; text-decoration:none;">
+                                 <i class="fas fa-comment-alt"></i>
+                                 </a>
+                                 <p>Parent Complain Box</p>
+                                 </div>
+                        
+                               <div class="line-container">
+                                  <hr class="line-left">
+                                  <span class="line-text">Share</span>
+                                  <hr class="line-right">
+                              </div>
+                              
+                              <div class="icon-row2">
+                                  <div class="icon" >
+                                      <i class="fas fa-qrcode" id= "qricon"></i>
+                                      <p>QR </p>
+                                   </div>
+                                    <div class="icon" onclick="toggleShareOptions()">
                                       <i class="fa-solid fa-share-nodes"></i>
                                       <p> Share </p>
                                    </div>
@@ -640,18 +725,13 @@ function fetchUserData() {
                                     <button class="close-btn" onclick="closeShareOptions()">Close</button>
                                  </div>
                                </div>
+                                
+                          
+                               
+                               
 
-                                 <div class="modal" id="myModal">
-                                    <div class="modal-content">
-                                    <p id="modalText">This is a modal box!</p>
-                                    </div>
-                                </div>
 
-                         </div>
-
-                        
-  
-                          <div class="section">
+                      
                               <div class="line-container">
                                   <hr class="line-left">
                                   <span class="line-text">Social</span>
@@ -671,6 +751,14 @@ function fetchUserData() {
                                       <i class="fas fa-globe" onclick="window.open('${data.website}', '_blank')"></i>
                                   </div>
                               </div>
+
+                               
+
+                              <div class="modal" id="myModal">
+                                    <div class="modal-content">
+                                    <p id="modalText">This is a modal box!</p>
+                                    </div>
+                                </div>
                               
                        </div>
 
@@ -712,8 +800,7 @@ function fetchUserData() {
 
                                
                       </div>
-                      <div>
-                                  <button class="center-button" onclick="generateDynamicVCF('${username}')">Add Contact</button></div>
+                      
                        </div>
     
                   </div>`;
