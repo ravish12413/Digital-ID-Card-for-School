@@ -255,12 +255,12 @@ function preChecks() {
 function populateFormFields(data) {
   console.log("Fetched data:", data);
   template.value = data.template || "schooltemplate1";
-  schoolLogo.value = data.schoolLogo || "Not Provided";
+  schoolLogo.value = "";
   schoolName.value = data.schoolName || "Not Provided";
   schoolTagline.value = data.schoolTagline || "Not Provided";
-  schoolBanner.value = data.schoolBanner || "Not Provided";
+  schoolBanner.value = "";
   studentName.value = data.studentName || "Not Provided";
-  studentPicture.value = data.studentPicture || "Not Provided";
+  studentPicture.value = "";
   studentClass.value = data.studentClass || "Not Provided";
   studentSection.value = data.studentSection || "Not Provided";
   studentRollNo.value = data.studentRollNo || "Not Provided";
@@ -271,15 +271,15 @@ function populateFormFields(data) {
   classTeacherWhatsapp.value = data.classTeacherWhatsapp || "Not Provided";
   classTeacherEmail.value = data.classTeacherEmail || "Not Provided";
   principalEmail.value = data.principalEmail || "Not Provided";
-  qrcodelink.value = data.qrcodelink || "Not Provided";
+  qrcodelink.value = "";
   parentabout.value = data.parentabout || "Not Provided";
   teacherabout.value = data.teacherabout || "Not Provided";
   studentDob.value = data.studentDob || "Not Provided";
   studentBloodgroup.value = data.studentBloodgroup || "Not Provided";
   address.value = data.address || "Not Provided";
-  gallery1.value = data.gallery1 || "Not Provided";
-  gallery2.value = data.gallery2 || "Not Provided";
-  gallery3.value = data.gallery3 || "Not Provided";
+  gallery1.value = "";
+  gallery2.value = "";
+  gallery3.value = "";
   website.value = data.website || "Not Provided";
   facebook.value = data.facebook || "Not Provided";
   instagram.value = data.instagram || "Not Provided";
@@ -291,46 +291,121 @@ function populateFormFields(data) {
 
 }
 
-//Function that is called on the click of save button. Accessing DOM elements value and passing it into saveMessage function
-function submitForm() {
-  // DOM elements
-  let template = document.getElementById('template').value;
-  let schoolLogo = document.getElementById('schoolLogo').value;
-  let schoolName = document.getElementById('schoolName').value;
-  let schoolTagline = document.getElementById('schoolTagline').value;
-  let schoolBanner = document.getElementById('schoolBanner').value;
-  let studentPicture = document.getElementById('studentPicture').value;
-  let studentName = document.getElementById('studentName').value;
-  let studentClass = document.getElementById('studentClass').value;
-  let studentSection = document.getElementById('studentSection').value;
-  let studentRollNo = document.getElementById('studentRollNo').value;
-  let parentNumber = document.getElementById('studentNumber').value;
-  let parentWhatsapp = document.getElementById('parentWhatsapp').value;
-  let parentemail = document.getElementById('parentemail').value;
-  let classTeacherNumber = document.getElementById('classTeacherNumber').value;
-  let classTeacherWhatsapp = document.getElementById('classTeacherWhatsapp').value;
-  let classTeacherEmail = document.getElementById('classTeacherEmail').value;
-  let principalEmail = document.getElementById('principalEmail').value;
-  let qrcodelink = document.getElementById('qrcodelink').value;
-  let parentabout = document.getElementById('parentabout').value;
-  let teacherabout = document.getElementById('teacherabout').value;
-  let studentDob = document.getElementById('studentDob').value;
-  let studentBloodgroup = document.getElementById('studentBloodgroup').value;
-  let address = document.getElementById('address').value;
-  let gallery1 = document.getElementById('gallery1').value;
-  let gallery2 = document.getElementById('gallery2').value;
-  let gallery3 = document.getElementById('gallery3').value;
-  let website = document.getElementById('website').value;
-  let facebook = document.getElementById('facebook').value;
-  let instagram = document.getElementById('instagram').value;
-  let youtube = document.getElementById('youtube').value;
-  let twitter = document.getElementById('twitter').value;
-  let linkedin = document.getElementById('linkedin').value;
-  let getDirections = document.getElementById('getDirections').value;
-  let editBtn = document.getElementById('editBtn').value;
-  let saveBtn = document.getElementById('saveBtn').value;
-  saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,parentNumber,parentWhatsapp,parentEmail,classTeacherNumber,classTeacherWhatsapp,classTeacherEmail,principalEmail,qrcodelink,parentabout,teacherabout , studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections);
+//cloudinary integration 
+const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dico3j30a/image/upload";
+const CLOUDINARY_UPLOAD_PRESET = "image-upload";
+
+// Upload Image to Cloudinary
+async function uploadImageToCloudinary(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+    try {
+        const response = await fetch(CLOUDINARY_URL, {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        if (data.secure_url) {
+            window.alert("Image successfully!");
+            console.log("Image uploaded:", data.secure_url);
+            return data.secure_url;
+        } else {
+            throw new Error("Failed to upload image");
+            
+        }
+    } catch (error) {
+        console.error("Cloudinary upload error:", error);
+        alert(`Cloudinary upload error: ${error.message}`);
+        return null;
+    }
 }
+
+
+//Function that is called on the click of save button. Accessing DOM elements value and passing it into saveMessage function
+document.getElementById("cardForm").addEventListener("submit", async function (event) {
+  event.preventDefault(); // Prevent form from submitting normally
+
+  console.log("Form submitted! Uploading images...");
+
+  const saveButton = document.getElementById("saveBtn");
+  saveButton.innerText = "Uploading... Please wait";
+  saveButton.disabled = true;
+
+  try {
+    let template = document.getElementById("template")?.value || "defaultTemplate";
+    let schoolLogo = document.getElementById("schoolLogo")?.files[0] || null;
+    let schoolBanner = document.getElementById("schoolBanner")?.files[0] || null;
+    let studentPicture = document.getElementById("studentPicture")?.files[0] || null;
+    let gallery1 = document.getElementById("gallery1")?.files[0] || null;
+    let gallery2 = document.getElementById("gallery2")?.files[0] || null;
+    let gallery3 = document.getElementById("gallery3")?.files[0] || null;
+    let qrcodelink = document.getElementById("qrcodelink")?.files[0] || null;
+
+    let schoolName = document.getElementById("schoolName")?.value || "Not Provided";
+    let schoolTagline = document.getElementById("schoolTagline")?.value || "Not Provided";
+    let studentName = document.getElementById("studentName")?.value || "Not Provided";
+    let studentClass = document.getElementById("studentClass")?.value || "Not Provided";
+    let studentSection = document.getElementById("studentSection")?.value || "Not Provided";
+    let studentRollNo = document.getElementById("studentRollNo")?.value || "Not Provided";
+    let parentNumber = document.getElementById("studentNumber")?.value || "Not Provided";
+    let parentWhatsapp = document.getElementById("parentWhatsapp")?.value || "Not Provided";
+    let parentEmail = document.getElementById("parentemail")?.value || "Not Provided";
+    let classTeacherNumber = document.getElementById("classTeacherNumber")?.value || "Not Provided";
+    let classTeacherWhatsapp = document.getElementById("classTeacherWhatsapp")?.value || "Not Provided";
+    let classTeacherEmail = document.getElementById("classTeacherEmail")?.value || "Not Provided";
+    let principalEmail = document.getElementById("principalEmail")?.value || "Not Provided";
+    let parentAbout = document.getElementById("parentabout")?.value || "Not Provided";
+    let teacherAbout = document.getElementById("teacherabout")?.value || "Not Provided";
+    let studentDob = document.getElementById("studentDob")?.value || "Not Provided";
+    let studentBloodgroup = document.getElementById("studentBloodgroup")?.value || "Not Provided";
+    let address = document.getElementById("address")?.value || "Not Provided";
+    let website = document.getElementById("website")?.value || "Not Provided";
+    let facebook = document.getElementById("facebook")?.value || "Not Provided";
+    let instagram = document.getElementById("instagram")?.value || "Not Provided";
+    let youtube = document.getElementById("youtube")?.value || "Not Provided";
+    let twitter = document.getElementById("twitter")?.value || "Not Provided";
+    let linkedin = document.getElementById("linkedin")?.value || "Not Provided";
+    let getDirections = document.getElementById("getDirections")?.value || "Not Provided";
+
+    console.log("Uploading images...");
+
+    let uploadedImages = await Promise.all([
+      schoolLogo ? uploadImageToCloudinary(schoolLogo) : "",
+      schoolBanner ? uploadImageToCloudinary(schoolBanner) : "",
+      studentPicture ? uploadImageToCloudinary(studentPicture) : "",
+      gallery1 ? uploadImageToCloudinary(gallery1) : "",
+      gallery2 ? uploadImageToCloudinary(gallery2) : "",
+      gallery3 ? uploadImageToCloudinary(gallery3) : "",
+      qrcodelink ? uploadImageToCloudinary(qrcodelink) : ""
+    ]);
+
+    [schoolLogo, schoolBanner, studentPicture, gallery1, gallery2, gallery3, qrcodelink] = uploadedImages;
+
+    console.log("Saving data to Firebase...");
+
+    saveMessage(
+      template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
+      studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentEmail, 
+      classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalEmail, qrcodelink, 
+      parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+      gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
+    );
+
+    console.log("Data saved successfully!");
+    alert("Data saved successfully!");
+
+    toggleViewMode(true);
+  } catch (error) {
+    console.error("Error in form submission:", error);
+    alert(`Error in form submission: ${error.message}`);
+  } finally {
+    saveButton.innerText = "Save";
+    saveButton.disabled = false;
+  }
+});
 
 
 // Function to update Data on Card Dashboard Page & if saved successfully, toggle the save button back to edit
@@ -370,9 +445,9 @@ function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBann
     twitter: twitter,
     linkedin: linkedin,
     getDirections: getDirections,
-  });
+  })
 
-  dbRef.set(userRef).then(() => {
+  .then(() => {
     alert("Data saved successfully!");
     toggleViewMode(true);
   }).catch((error) => {
