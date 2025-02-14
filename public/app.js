@@ -697,7 +697,7 @@ function fetchUserData() {
                                       
                                   <a href="tel:${data.classTeacherNumber}" style=" color:#2a4a95; text-decoration:none;"><i class="fas fa-phone" id="classteachernumber"></i></a>
                                   <p id="classteacherNumber">Number</p>
-                            
+                                  
                                   </div>
 
                                   <div class="icon">
@@ -761,6 +761,7 @@ function fetchUserData() {
                                     <button class="close-btn" onclick="closeShareOptions()">Close</button>
                                  </div>
                                </div>
+                               
                                 
                           
                                
@@ -850,6 +851,9 @@ function fetchUserData() {
       //modal box opening 
       var modal = document.getElementById("myModal");
       var modalText = document.getElementById("modalText");
+      var trigger = document.getElementById("parentabout");
+      var trigger = document.getElementById("teacherabout");
+      var trigger = document.getElementById("qrcodelink");
 
       // Get the iconss
       var icon3 = document.getElementById("legal-icon");
@@ -872,19 +876,15 @@ function fetchUserData() {
       }
 
 
-      icon3.onclick = function () {
-        modal.style.display = "flex";
-        modalText.textContent = `${data.legalInfo || 'Legal Information'}`;
-      }
 
 
       // Close the modal when clicking anywhere outside the modal content
       window.onclick = function (event) {
-        if (event.target == modal) {
-          modal.style.display = "none";
+        if (event.target == modal) {  // Check if the click is outside the modal
+            modal.style.display = "none";  // Hide the modal
         }
-      }
-
+    };
+      
       showInstallPrompt(); // Show the install prompt button
 
       // Hide the loading message
