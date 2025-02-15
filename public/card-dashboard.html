@@ -38,7 +38,7 @@
 
   <!--This is the Dashboard page where the user enters all the details of the Card or Update them-->
   <h2 style="text-align: center; margin-top: 10px;">DASHBOARD</h2>
-  <p style="text-align: center;">Below are your details for Digital Business Card</p>
+  <p style="text-align: center;">Fill your details to Generate Card</p>
   <button onclick="signOut()" class="btn btn-primary" style="margin-left: 46%; margin-bottom: 5px;">Sign Out</button>
 
   <form class="container" id="cardForm">
@@ -50,18 +50,14 @@
             <label for="template">Slect Card Template</label>
             <select name="template" id="template" required readonly>
               <option value="schooltemplate1">School Template 1</option>
-              <option value="companytemplate2">Company Template 2</option>
-              <option value="companytemplate3">Company Template 3</option>
-              <option value="companytemplate4">Company Template 4</option>
-              <option value="companytemplate5">Company Template 5</option>
-              <option value="professionaltemplate">Professional Template</option>
             </select>
         </div>
     
         <div class="form-group">
           <label for="exampleFormControlInput1">School Logo</label>
-          <input type="file" class="form-control" id="schoolLogo" placeholder="Upload Your School logo" accept="image/*" required
+          <input type="file" class="form-control" id="schoolLogo" placeholder="Upload Your School logo" accept="image/*" 
             readonly>
+            <img id="schoolLogoPreview" src="" style="max-width: 100px; display: none;">
         </div>
 
 
@@ -75,14 +71,12 @@
             <input type="text" class="form-control" id="schoolTagline" placeholder="School Tagline" required readonly>
         </div>
 
-        <div class="form-group">
-          <label for="exampleFormControlInput1">QR code </label>
-          <input type="file" class="form-control" id="qrcodelink" placeholder="QR Code" accept="image/*" required readonly>
-      </div>
+
 
         <div class="form-group">
           <label for="exampleFormControlInput1">School Banner </label>
-          <input type="file" class="form-control" id="schoolBanner" placeholder="School Banner" accept="image/*" required readonly>
+          <input type="file" class="form-control" id="schoolBanner" placeholder="School Banner" accept="image/*"  readonly>
+          <img id="schoolBannerPreview" src="" style="max-width: 100px; display: none;">
         </div>
 
 
@@ -97,7 +91,8 @@
         <div class="form-group">
           <label for="exampleFormControlInput1">Student Profile Picture </label>
           <input type="file" class="form-control" id="studentPicture" placeholder="Student Picture" accept="image/*"
-            required readonly> <!-- New field -->
+          readonly> <!-- New field -->
+            <img id="studentPicturePreview" src="" style="max-width: 100px; display: none;">
         </div>
 
         <div class="form-group">
@@ -121,21 +116,77 @@
 
 
         <div class="form-group">
-          <label for="exampleFormControlInput1">Student Number</label>
-          <input type="text" class="form-control" id="studentNumber" placeholder="Student Number"
-            required readonly> <!-- New field -->
-        </div>
-
-        <div class="form-group">
           <label for="exampleFormControlInput1">Sudent DOB</label>
-          <input type="text" class="form-control" id="studentDob" placeholder="Student DOB" required
-            readonly> <!-- New field -->
+          <input type="text" class="form-control" id="studentDob" placeholder="DOB in format yyyy-mm-dd" required readonly> <!-- New field -->
         </div>
 
         <div class="form-group">
           <label for="exampleFormControlInput1">Sudent Blood Group</label>
           <input type="text" class="form-control" id="studentBloodgroup" placeholder="Student Blood Group" required
             readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Parent's Number</label>
+          <input type="text" class="form-control" id="parentNumber" placeholder="Parent Number"
+            required readonly> <!-- New field -->
+        </div>
+        
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Parent's WhatsApp</label>
+          <input type="text" class="form-control" id="parentWhatsapp" placeholder="Parent Whatsapp"
+            required readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Parent's Email</label>
+          <input type="text" class="form-control" id="parentemail" placeholder="Parent Email"
+            required readonly> <!-- New field -->
+        </div>
+
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Class Teacher Number</label>
+          <input type="text" class="form-control" id="classTeacherNumber" placeholder="Class Teacher Number"
+            required readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Class Teacher WhatsApp</label>
+          <input type="text" class="form-control" id="classTeacherWhatsapp" placeholder="Class Teacher WhatsApp"
+            required readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Class Teacher Email</label>
+          <input type="text" class="form-control" id="classTeacherEmail" placeholder="Class Teacher Email"
+            required readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Principal Email</label>
+          <input type="text" class="form-control" id="principalemail" placeholder="Principal Number"
+            required readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">QR Code</label>
+          <input type="file" class="form-control" id="qrcodelink" placeholder="QR Code Link" accept="image/*"
+             readonly> <!-- New field -->
+            <img id="qrcodelinkPreview" src="" style="max-width: 100px; display: none;">
+
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">About Parents</label>
+          <input type="text" class="form-control" id="parentabout" placeholder="About Parents"
+            required readonly> <!-- New field -->
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1">About Teacher</label>
+          <input type="text" class="form-control" id="teacherabout" placeholder="About Teachers"
+            required readonly> <!-- New field -->
         </div>
 
 
@@ -147,20 +198,23 @@
 
         <div class="form-group">
           <label for="exampleFormControlInput1">Gallery Image 1</label>
-          <input type="file" class="form-control" id="gallery1" placeholder="Gallery Image 1" accept="image/*" required readonly>
+          <input type="file" class="form-control" id="gallery1" placeholder="Gallery Image 1" accept="image/*" readonly>
           <!-- New field -->
+          <img id="gallery1Preview" src="" style="max-width: 100px; display: none;">
         </div>
 
         <div class="form-group">
           <label for="exampleFormControlInput1">Gallery Image 2</label>
-          <input type="file" class="form-control" id="gallery2" placeholder="Gallery Image 2" accept="image/*" required readonly>
+          <input type="file" class="form-control" id="gallery2" placeholder="Gallery Image 2" accept="image/*" readonly>
           <!-- New field -->
+          <img id="gallery2Preview" src="" style="max-width: 100px; display: none;">
         </div>
 
         <div class="form-group">
           <label for="exampleFormControlInput1">Gallery Image 3</label>
-          <input type="file" class="form-control" id="gallery3" placeholder="Gallery Image 3" accept="image/*" required readonly>
+          <input type="file" class="form-control" id="gallery3" placeholder="Gallery Image 3" accept="image/*" readonly>
           <!-- New field -->
+          <img id="gallery1Preview" src="" style="max-width: 100px; display: none;">
         </div>
 
 

@@ -254,41 +254,59 @@ function preChecks() {
 //Function to populate data from db into the Form fields. This function is called in preChecks function
 function populateFormFields(data) {
   console.log("Fetched data:", data);
-  template.value = data.template || "schooltemplate1";
-  schoolLogo.value = "";
-  schoolName.value = data.schoolName || "Not Provided";
-  schoolTagline.value = data.schoolTagline || "Not Provided";
-  schoolBanner.value = "";
-  studentName.value = data.studentName || "Not Provided";
-  studentPicture.value = "";
-  studentClass.value = data.studentClass || "Not Provided";
-  studentSection.value = data.studentSection || "Not Provided";
-  studentRollNo.value = data.studentRollNo || "Not Provided";
-  parentNumber.value = data.parentNumber || "Not Provided";
-  parentWhatsapp.value = data.parentWhatsapp || "Not Provided";
-  parentemail.value = data.parentemail || "Not Provided";
-  classTeacherNumber.value = data.classTeacherNumber || "Not Provided";
-  classTeacherWhatsapp.value = data.classTeacherWhatsapp || "Not Provided";
-  classTeacherEmail.value = data.classTeacherEmail || "Not Provided";
-  principalEmail.value = data.principalEmail || "Not Provided";
-  qrcodelink.value = "";
-  parentabout.value = data.parentabout || "Not Provided";
-  teacherabout.value = data.teacherabout || "Not Provided";
-  studentDob.value = data.studentDob || "Not Provided";
-  studentBloodgroup.value = data.studentBloodgroup || "Not Provided";
-  address.value = data.address || "Not Provided";
-  gallery1.value = "";
-  gallery2.value = "";
-  gallery3.value = "";
-  website.value = data.website || "Not Provided";
-  facebook.value = data.facebook || "Not Provided";
-  instagram.value = data.instagram || "Not Provided";
-  youtube.value = data.youtube || "Not Provided";
-  twitter.value = data.twitter || "Not Provided";
-  linkedin.value = data.linkedin || "Not Provided";
-  getDirections.value = data.getDirections || "Not Provided";
-  toggleViewMode(true); // Start in view mode
+  
+  document.getElementById("template").value = data.template || "schooltemplate1";
+  document.getElementById("schoolName").value = data.schoolName || "Not Provided";
+  document.getElementById("schoolTagline").value = data.schoolTagline || "Not Provided";
+  document.getElementById("studentName").value = data.studentName || "Not Provided";
+  document.getElementById("studentClass").value = data.studentClass || "Not Provided";
+  document.getElementById("studentSection").value = data.studentSection || "Not Provided";
+  document.getElementById("studentRollNo").value = data.studentRollNo || "Not Provided";
+  document.getElementById("parentNumber").value = data.parentNumber || "Not Provided";
+  document.getElementById("parentWhatsapp").value = data.parentWhatsapp || "Not Provided";
+  document.getElementById("parentemail").value = data.parentemail || "Not Provided";
+  document.getElementById("classTeacherNumber").value = data.classTeacherNumber || "Not Provided";
+  document.getElementById("classTeacherWhatsapp").value = data.classTeacherWhatsapp || "Not Provided";
+  document.getElementById("classTeacherEmail").value = data.classTeacherEmail || "Not Provided";
+  document.getElementById("principalemail").value = data.principalemail || "Not Provided";
+  document.getElementById("parentabout").value = data.parentabout || "Not Provided";
+  document.getElementById("teacherabout").value = data.teacherabout || "Not Provided";
+  document.getElementById("studentDob").value = data.studentDob || "Not Provided";
+  document.getElementById("studentBloodgroup").value = data.studentBloodgroup || "Not Provided";
+  document.getElementById("address").value = data.address || "Not Provided";
+  document.getElementById("website").value = data.website || "Not Provided";
+  document.getElementById("facebook").value = data.facebook || "Not Provided";
+  document.getElementById("instagram").value = data.instagram || "Not Provided";
+  document.getElementById("youtube").value = data.youtube || "Not Provided";
+  document.getElementById("twitter").value = data.twitter || "Not Provided";
+  document.getElementById("linkedin").value = data.linkedin || "Not Provided";
+  document.getElementById("getDirections").value = data.getDirections || "Not Provided";
 
+  // ✅ Show stored image previews (if available)
+  updateImagePreview("schoolLogo", data.schoolLogo);
+  updateImagePreview("schoolBanner", data.schoolBanner);
+  updateImagePreview("studentPicture", data.studentPicture);
+  updateImagePreview("qrcodelink", data.qrcodelink);
+  updateImagePreview("gallery1", data.gallery1);
+  updateImagePreview("gallery2", data.gallery2);
+  updateImagePreview("gallery3", data.gallery3);
+
+  toggleViewMode(true); // Start in view mode
+}
+
+/**
+ * Function to update image previews.
+ */
+function updateImagePreview(inputId, imageUrl) {
+  const inputElement = document.getElementById(inputId);
+  const previewElement = document.getElementById(`${inputId}Preview`);
+
+  if (imageUrl) {
+    previewElement.src = imageUrl;
+    previewElement.style.display = "block";
+  } else {
+    previewElement.style.display = "none";
+  }
 }
 
 //cloudinary integration 
@@ -356,7 +374,7 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
     let classTeacherNumber = document.getElementById("classTeacherNumber")?.value || "Not Provided";
     let classTeacherWhatsapp = document.getElementById("classTeacherWhatsapp")?.value || "Not Provided";
     let classTeacherEmail = document.getElementById("classTeacherEmail")?.value || "Not Provided";
-    let principalEmail = document.getElementById("principalEmail")?.value || "Not Provided";
+    let principalemail = document.getElementById("principalemail")?.value || "Not Provided";
     let parentAbout = document.getElementById("parentabout")?.value || "Not Provided";
     let teacherAbout = document.getElementById("teacherabout")?.value || "Not Provided";
     let studentDob = document.getElementById("studentDob")?.value || "Not Provided";
@@ -389,7 +407,7 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
     saveMessage(
       template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
       studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentEmail, 
-      classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalEmail, qrcodelink, 
+      classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
       parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
       gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
     );
@@ -409,7 +427,7 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
 
 
 // Function to update Data on Card Dashboard Page & if saved successfully, toggle the save button back to edit
-function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,parentNumber,parentWhatsapp,parentEmail,classTeacherNumber,classTeacherWhatsapp,classTeacherEmail,principalEmail,qrcodelink,parentabout,teacherabout , studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections){
+function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,parentNumber,parentWhatsapp,parentEmail,classTeacherNumber,classTeacherWhatsapp,classTeacherEmail,principalemail,qrcodelink,parentabout,teacherabout , studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections){
   let userRef = dbRef.child(`Collected Data/${username}`);
   userRef.set({
     template: template,
@@ -428,7 +446,7 @@ function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBann
     classTeacherNumber: classTeacherNumber,
     classTeacherWhatsapp: classTeacherWhatsapp,
     classTeacherEmail: classTeacherEmail,
-    principalEmail: principalEmail,
+    principalemail: principalemail,
     qrcodelink: qrcodelink,
     parentabout: parentabout,
     teacherabout: teacherabout,
@@ -475,7 +493,7 @@ function toggleViewMode(isViewMode) {
   classTeacherNumber.readOnly = isViewMode;
   classTeacherWhatsapp.readOnly = isViewMode;
   classTeacherEmail.readOnly = isViewMode;
-  principalEmail.readOnly = isViewMode;
+  principalemail.readOnly = isViewMode;
   qrcodelink.readOnly = isViewMode;
   parentabout.readOnly = isViewMode;
   teacherabout.readOnly = isViewMode;
