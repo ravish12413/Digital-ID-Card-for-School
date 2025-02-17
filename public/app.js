@@ -368,9 +368,9 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
     let studentClass = document.getElementById("studentClass")?.value || "Not Provided";
     let studentSection = document.getElementById("studentSection")?.value || "Not Provided";
     let studentRollNo = document.getElementById("studentRollNo")?.value || "Not Provided";
-    let parentNumber = document.getElementById("studentNumber")?.value || "Not Provided";
+    let parentNumber = document.getElementById("parentNumber")?.value || "Not Provided";
     let parentWhatsapp = document.getElementById("parentWhatsapp")?.value || "Not Provided";
-    let parentEmail = document.getElementById("parentemail")?.value || "Not Provided";
+    let parentemail = document.getElementById("parentemail")?.value || "Not Provided";
     let classTeacherNumber = document.getElementById("classTeacherNumber")?.value || "Not Provided";
     let classTeacherWhatsapp = document.getElementById("classTeacherWhatsapp")?.value || "Not Provided";
     let classTeacherEmail = document.getElementById("classTeacherEmail")?.value || "Not Provided";
@@ -406,7 +406,7 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
 
     saveMessage(
       template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
-      studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentEmail, 
+      studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentemail, 
       classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
       parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
       gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
@@ -427,51 +427,45 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
 
 
 // Function to update Data on Card Dashboard Page & if saved successfully, toggle the save button back to edit
-function saveMessage(template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, studentClass, studentSection, studentRollNo ,parentNumber,parentWhatsapp,parentEmail,classTeacherNumber,classTeacherWhatsapp,classTeacherEmail,principalemail,qrcodelink,parentabout,teacherabout , studentDob, studentBloodgroup, address, gallery1, gallery2, gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections){
+async function saveMessage(
+  template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
+  studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentemail, 
+  classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
+  parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+  gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
+) {
   let userRef = dbRef.child(`Collected Data/${username}`);
-  userRef.set({
-    template: template,
-    schoolLogo: schoolLogo,
-    schoolName: schoolName,
-    schoolTagline: schoolTagline,
-    schoolBanner: schoolBanner,
-    studentName: studentName,
-    studentPicture: studentPicture,
-    studentClass: studentClass,
-    studentSection: studentSection,
-    studentRollNo: studentRollNo,
-    parentNumber: parentNumber,
-    parentWhatsapp: parentWhatsapp,
-    parentEmail: parentEmail,
-    classTeacherNumber: classTeacherNumber,
-    classTeacherWhatsapp: classTeacherWhatsapp,
-    classTeacherEmail: classTeacherEmail,
-    principalemail: principalemail,
-    qrcodelink: qrcodelink,
-    parentabout: parentabout,
-    teacherabout: teacherabout,
-    studentDob: studentDob,
-    studentBloodgroup: studentBloodgroup,
-    address: address,
-    gallery1: gallery1,
-    gallery2: gallery2,
-    gallery3: gallery3,
-    website: website,
-    facebook: facebook,
-    instagram: instagram,
-    youtube: youtube,
-    twitter: twitter,
-    linkedin: linkedin,
-    getDirections: getDirections,
-  })
 
-  .then(() => {
+  try {
+    // 🔍 Fetch existing data from Firebase
+    let snapshot = await userRef.get();
+    let existingData = snapshot.exists() ? snapshot.val() : {};
+
+    // 🛠️ Preserve old image URLs if new images are not uploaded
+    schoolLogo = schoolLogo || existingData.schoolLogo || "";
+    schoolBanner = schoolBanner || existingData.schoolBanner || "";
+    studentPicture = studentPicture || existingData.studentPicture || "";
+    gallery1 = gallery1 || existingData.gallery1 || "";
+    gallery2 = gallery2 || existingData.gallery2 || "";
+    gallery3 = gallery3 || existingData.gallery3 || "";
+    qrcodelink = qrcodelink || existingData.qrcodelink || "";
+
+    // 🔄 Update only changed fields
+    await userRef.update({
+      template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
+      studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentemail, 
+      classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
+      parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+      gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
+    });
+
     alert("Data saved successfully!");
     toggleViewMode(true);
-  }).catch((error) => {
+  } catch (error) {
     console.error("Error saving data:", error);
-  });
-};
+    alert(`Error saving data: ${error.message}`);
+  }
+}
 
 
 
@@ -652,9 +646,9 @@ N:${data.studentName || ''}
 FN:${data.studentName || ''}
 ORG:${data.schoolName || ''}
 TITLE:${data.student || ''}
-TEL;TYPE=WORK,VOICE:${data.studentNumber || ''}
-TEL;TYPE=CELL,WHATSAPP:${data.studentNumber || ''}
-EMAIL;TYPE=WORK:${data.email || ''}
+TEL;TYPE=WORK,VOICE:${data.parentNumber || ''}
+TEL;TYPE=CELL,WHATSAPP:${data.parentNumber || ''}
+EMAIL;TYPE=WORK:${data.parentemail || ''}
 ADR;TYPE=WORK:;;${data.address || ''}
 URL:${data.website || ''}
 NOTE:${data.services || ''}
