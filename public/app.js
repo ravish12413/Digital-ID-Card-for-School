@@ -9,7 +9,6 @@ const firebaseConfig = {
   appId: "1:476698542874:web:41c0c69274d5d95a9522a3"
 };
 
-
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -341,7 +340,6 @@ async function uploadImageToCloudinary(file) {
     }
 }
 
-
 //Function that is called on the click of save button. Accessing DOM elements value and passing it into saveMessage function
 document.getElementById("cardForm").addEventListener("submit", async function (event) {
   event.preventDefault(); // Prevent form from submitting normally
@@ -438,7 +436,7 @@ async function saveMessage(
 
   try {
     // 🔍 Fetch existing data from Firebase
-    let snapshot = await userRef.get();
+    let snapshot = await userRef.once('value');
     let existingData = snapshot.exists() ? snapshot.val() : {};
 
     // 🛠️ Preserve old image URLs if new images are not uploaded
