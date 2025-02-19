@@ -262,6 +262,7 @@ function populateFormFields(data) {
   document.getElementById("studentClass").value = data.studentClass || "Not Provided";
   document.getElementById("studentSection").value = data.studentSection || "Not Provided";
   document.getElementById("studentRollNo").value = data.studentRollNo || "Not Provided";
+  document.getElementById("studentAdmNo").value = data.studentAdmNo || "Not Provided";
   document.getElementById("parentNumber").value = data.parentNumber || "Not Provided";
   document.getElementById("parentWhatsapp").value = data.parentWhatsapp || "Not Provided";
   document.getElementById("parentemail").value = data.parentemail || "Not Provided";
@@ -368,6 +369,7 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
     let studentClass = document.getElementById("studentClass")?.value || "Not Provided";
     let studentSection = document.getElementById("studentSection")?.value || "Not Provided";
     let studentRollNo = document.getElementById("studentRollNo")?.value || "Not Provided";
+    let studentAdmNo = document.getElementById("studentAdmNo")?.value || "Not Provided";
     let parentNumber = document.getElementById("parentNumber")?.value || "Not Provided";
     let parentWhatsapp = document.getElementById("parentWhatsapp")?.value || "Not Provided";
     let parentemail = document.getElementById("parentemail")?.value || "Not Provided";
@@ -375,8 +377,8 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
     let classTeacherWhatsapp = document.getElementById("classTeacherWhatsapp")?.value || "Not Provided";
     let classTeacherEmail = document.getElementById("classTeacherEmail")?.value || "Not Provided";
     let principalemail = document.getElementById("principalemail")?.value || "Not Provided";
-    let parentAbout = document.getElementById("parentabout")?.value || "Not Provided";
-    let teacherAbout = document.getElementById("teacherabout")?.value || "Not Provided";
+    let parentabout = document.getElementById("parentabout")?.value || "Not Provided";
+    let teacherabout = document.getElementById("teacherabout")?.value || "Not Provided";
     let studentDob = document.getElementById("studentDob")?.value || "Not Provided";
     let studentBloodgroup = document.getElementById("studentBloodgroup")?.value || "Not Provided";
     let address = document.getElementById("address")?.value || "Not Provided";
@@ -406,9 +408,9 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
 
     saveMessage(
       template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
-      studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentemail, 
+      studentClass, studentSection, studentRollNo, studentAdmNo, parentNumber, parentWhatsapp, parentemail, 
       classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
-      parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+      parentabout, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
       gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
     );
 
@@ -429,19 +431,18 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
 // Function to update Data on Card Dashboard Page & if saved successfully, toggle the save button back to edit
 async function saveMessage(
   template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
-  studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentemail, 
+  studentClass, studentSection, studentRollNo, studentAdmNo, parentNumber, parentWhatsapp, parentemail, 
   classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
-  parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+  parentabout, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
   gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
 ) {
   let userRef = dbRef.child(`Collected Data/${username}`);
 
   try {
-    // 🔍 Fetch existing data from Firebase
-    let snapshot = await userRef.get();
+    //  Fetch existing data from Firebase
+    let snapshot = await userRef.once("value");
     let existingData = snapshot.exists() ? snapshot.val() : {};
-
-    // 🛠️ Preserve old image URLs if new images are not uploaded
+    //  Preserve old image URLs if new images are not uploaded
     schoolLogo = schoolLogo || existingData.schoolLogo || "";
     schoolBanner = schoolBanner || existingData.schoolBanner || "";
     studentPicture = studentPicture || existingData.studentPicture || "";
@@ -450,12 +451,12 @@ async function saveMessage(
     gallery3 = gallery3 || existingData.gallery3 || "";
     qrcodelink = qrcodelink || existingData.qrcodelink || "";
 
-    // 🔄 Update only changed fields
+    // Update only changed fields
     await userRef.update({
       template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
-      studentClass, studentSection, studentRollNo, parentNumber, parentWhatsapp, parentemail, 
+      studentClass, studentSection, studentRollNo, studentAdmNo, parentNumber, parentWhatsapp, parentemail, 
       classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
-      parentAbout, teacherAbout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+      parentabout, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
       gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
     });
 
@@ -481,6 +482,7 @@ function toggleViewMode(isViewMode) {
   studentClass.readOnly = isViewMode;
   studentSection.readOnly = isViewMode;
   studentRollNo.readOnly = isViewMode;
+  studentAdmNo.readOnly = isViewMode;
   parentNumber.readOnly = isViewMode;
   parentWhatsapp.readOnly = isViewMode;
   parentemail.readOnly = isViewMode;
@@ -718,7 +720,7 @@ function fetchUserData() {
                                   <p id="studentClass">Class :${data.studentClass || 'Student Class'}</p>
                                   <p id="studentSection">Section : ${data.studentSection || 'Student Section'}</p>
                                   <p id="studentRollNo">Roll No : ${data.studentRollNo || 'Student Roll No.'}</p>
-                                  <p id="studentRollNo">Addmission No : ${data.studentRollNo || 'Student Roll No.'}</p>
+                                  <p id="studentAdmNo">Addmission No : ${data.studentAdmNo || 'Student Admission No.'}</p>
                                   <p id="studentDob">DOB: ${data.studentDob || 'Student DOB'}</p>
                                   <p id="studentBloodgroup">Blood Group : ${data.studentBloodgroup || 'Student Blood Group'}</p>
                                   </div>
