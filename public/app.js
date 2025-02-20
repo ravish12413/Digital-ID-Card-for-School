@@ -270,7 +270,9 @@ function populateFormFields(data) {
   document.getElementById("classTeacherWhatsapp").value = data.classTeacherWhatsapp || "Not Provided";
   document.getElementById("classTeacherEmail").value = data.classTeacherEmail || "Not Provided";
   document.getElementById("principalemail").value = data.principalemail || "Not Provided";
-  document.getElementById("parentabout").value = data.parentabout || "Not Provided";
+  //document.getElementById("parentabout").value = data.parentabout || "Not Provided";
+  document.getElementById("fatherName").value = data.fatherName || "Not Provided";
+  document.getElementById("MotherName").value = data.motherName || "Not Provided";
   document.getElementById("teacherabout").value = data.teacherabout || "Not Provided";
   document.getElementById("studentDob").value = data.studentDob || "Not Provided";
   document.getElementById("studentBloodgroup").value = data.studentBloodgroup || "Not Provided";
@@ -377,7 +379,9 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
     let classTeacherWhatsapp = document.getElementById("classTeacherWhatsapp")?.value || "Not Provided";
     let classTeacherEmail = document.getElementById("classTeacherEmail")?.value || "Not Provided";
     let principalemail = document.getElementById("principalemail")?.value || "Not Provided";
-    let parentabout = document.getElementById("parentabout")?.value || "Not Provided";
+    //let parentabout = document.getElementById("parentabout")?.value || "Not Provided";
+    let fatherName = document.getElementById("fatherName") ?.value || "Not Provided";
+    let motherName = document.getElementById("motherName") ?.value || "Not Provided";
     let teacherabout = document.getElementById("teacherabout")?.value || "Not Provided";
     let studentDob = document.getElementById("studentDob")?.value || "Not Provided";
     let studentBloodgroup = document.getElementById("studentBloodgroup")?.value || "Not Provided";
@@ -410,7 +414,7 @@ document.getElementById("cardForm").addEventListener("submit", async function (e
       template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
       studentClass, studentSection, studentRollNo, studentAdmNo, parentNumber, parentWhatsapp, parentemail, 
       classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
-      parentabout, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+      fatherName,motherName, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
       gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
     );
 
@@ -433,7 +437,7 @@ async function saveMessage(
   template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
   studentClass, studentSection, studentRollNo, studentAdmNo, parentNumber, parentWhatsapp, parentemail, 
   classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
-  parentabout, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+  fatherName, motherName, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
   gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
 ) {
   let userRef = dbRef.child(`Collected Data/${username}`);
@@ -456,7 +460,7 @@ async function saveMessage(
       template, schoolLogo, schoolName, schoolTagline, schoolBanner, studentName, studentPicture, 
       studentClass, studentSection, studentRollNo, studentAdmNo, parentNumber, parentWhatsapp, parentemail, 
       classTeacherNumber, classTeacherWhatsapp, classTeacherEmail, principalemail, qrcodelink, 
-      parentabout, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
+      fatherName, motherName, teacherabout, studentDob, studentBloodgroup, address, gallery1, gallery2, 
       gallery3, website, facebook, instagram, youtube, twitter, linkedin, getDirections
     });
 
@@ -491,7 +495,9 @@ function toggleViewMode(isViewMode) {
   classTeacherEmail.readOnly = isViewMode;
   principalemail.readOnly = isViewMode;
   qrcodelink.readOnly = isViewMode;
-  parentabout.readOnly = isViewMode;
+  //parentabout.readOnly = isViewMode;
+  fatherName.readOnly = isViewMode;
+  motherName.readOnly = isViewMode;
   teacherabout.readOnly = isViewMode;
   studentDob.readOnly = isViewMode;
   studentBloodgroup.readOnly = isViewMode;
@@ -951,7 +957,12 @@ function fetchUserData() {
 
       parentabouticon.onclick = function () {
         modal.style.display = "flex";
-        modalText.textContent = `${data.parentabout || 'About the company'}`;
+        modalText.innerHTML = `
+            <ul style="list-style-type: disc; padding-left: 20px;">
+                <li><b>Father Name:</b> ${data.fatherName || 'God Father'}</li>
+                <li><b>Mother Name:</b> ${data.motherName || 'Marry Mother'}</li>
+            </ul>
+        `;
       }
       
       teacherabouticon.onclick = function () {
