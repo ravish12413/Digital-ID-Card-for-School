@@ -272,7 +272,7 @@ function populateFormFields(data) {
   document.getElementById("principalemail").value = data.principalemail || "Not Provided";
   //document.getElementById("parentabout").value = data.parentabout || "Not Provided";
   document.getElementById("fatherName").value = data.fatherName || "Not Provided";
-  document.getElementById("MotherName").value = data.motherName || "Not Provided";
+  document.getElementById("motherName").value = data.motherName || "Not Provided";
   document.getElementById("teacherabout").value = data.teacherabout || "Not Provided";
   document.getElementById("studentDob").value = data.studentDob || "Not Provided";
   document.getElementById("studentBloodgroup").value = data.studentBloodgroup || "Not Provided";
@@ -297,9 +297,24 @@ function populateFormFields(data) {
   toggleViewMode(true); // Start in view mode
 }
 
+
+document.querySelectorAll("input[type='file']").forEach(input => {
+  input.addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById(`${event.target.id}Preview`).src = e.target.result;
+        document.getElementById(`${event.target.id}Preview`).style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+});
 /**
  * Function to update image previews.
  */
+
 function updateImagePreview(inputId, imageUrl) {
   const inputElement = document.getElementById(inputId);
   const previewElement = document.getElementById(`${inputId}Preview`);
@@ -723,7 +738,7 @@ function fetchUserData() {
                                   <img src="${data.studentPicture || 'default-profile.png'}" id="studentPicture" alt="Student Image">
                                   <h2 id="studentName">${data.studentName || 'Student Name'}</h2>
                                   <div class="profile-image1">
-                                  <p id="studentClass">Class :${data.studentClass || 'Student Class'}</p>
+                                  <p id="studentClass">Class : ${data.studentClass || 'Student Class'}</p>
                                   <p id="studentSection">Section : ${data.studentSection || 'Student Section'}</p>
                                   <p id="studentRollNo">Roll No : ${data.studentRollNo || 'Student Roll No.'}</p>
                                   <p id="studentAdmNo">Addmission No : ${data.studentAdmNo || 'Student Admission No.'}</p>
